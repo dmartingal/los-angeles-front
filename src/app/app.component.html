@@ -1,0 +1,27 @@
+<nav class="bg-blue-800 text-white px-6 py-4 shadow-md flex items-center justify-between">
+  <!-- Logo y título juntos a la izquierda -->
+  <div class="flex items-center gap-4">
+    <img src="assets/logoLosAngeles.png" alt="Logo Club" class="h-10 w-10 object-contain" />
+    <h1 class="text-center font-bold text-3xl text-white/70" style="font-family: 'Oswald', Arial, sans-serif;">
+       CLUB ATLETISMO LOS ÁNGELES VILLAVERDE
+    </h1>
+  </div>
+
+  <!-- Menú de navegación -->
+  <ul class="flex gap-6">
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/" routerLinkActive="font-bold">Noticias</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/alta-noticia" routerLinkActive="font-bold">Alta Noticia</a>
+</li>
+  </ul>
+</nav>
+
+<div class="p-6 my-6 bg-gradient-to-r from-fuchsia-500 via-blue-500 to-blue-800 rounded-xl shadow-lg flex items-center justify-center">
+  <span class="text-2xl md:text-3xl font-extrabold uppercase tracking-wide text-white drop-shadow-lg">
+    {{ sectionTitle }}
+  </span>
+</div>
+
+<router-outlet></router-outlet>
