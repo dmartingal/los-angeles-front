@@ -1,8 +1,11 @@
+
 export interface Noticia {
-  id?: number;
-  asunto: string;
-  texto: string;
+  id?: string; 
+  titulo: string;
+  descripcion: string;
+  imagenUrl: string;
+  imagenesSecundarias: string[];
+  linkDetalle: string;
   fecha?: string;
-  fotoPrincipal?: string;
-  fotosAdicionales?: string[];
+  categoria: 'Competición' | 'Escuela' | 'Eventos';
 }
