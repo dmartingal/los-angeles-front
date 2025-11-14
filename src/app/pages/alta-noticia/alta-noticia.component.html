@@ -1,23 +1,71 @@
 <div class="max-w-xl mx-auto mt-10 bg-white rounded-xl shadow-lg p-8">
   <h2 class="text-2xl font-bold text-blue-800 mb-6 text-center">Alta de Noticia</h2>
-  <form>
+
+  <!-- ngForm funciona porque el componente importa FormsModule -->
+  <form (ngSubmit)="submitForm()" #noticiaForm="ngForm" novalidate>
+    
+    <!-- Título -->
     <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="asunto">Título</label>
-      <input id="titulo" type="text" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Título o asunto de la noticia">
+      <label class="block text-blue-700 font-semibold mb-2" for="titulo">Título</label>
+      <input
+        id="titulo"
+        type="text"
+        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [(ngModel)]="noticia.titulo"
+        name="titulo"
+        required
+      />
     </div>
+
+    <!-- Descripción -->
     <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="texto">Descripción de la noticia</label>
-      <textarea id="descripcion" rows="5" class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Escribe aquí la noticia"></textarea>
+      <label class="block text-blue-700 font-semibold mb-2" for="descripcion">Descripción de la noticia</label>
+      <textarea
+        id="descripcion"
+        rows="5"
+        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [(ngModel)]="noticia.descripcion"
+        name="descripcion"
+        required
+      ></textarea>
     </div>
+
+    <!-- Fotografía principal -->
     <div class="mb-4">
       <label class="block text-blue-700 font-semibold mb-2" for="fotoPrincipal">Fotografía principal</label>
-      <input id="fotoPrincipal" type="file" accept="image/*" class="block w-full text-gray-700">
+      <input
+        id="fotoPrincipal"
+        type="file"
+        accept="image/*"
+        (change)="onFileChange($event, 'fotoPrincipal')"
+        class="block w-full text-gray-700"
+      />
     </div>
+
+    <!-- Fotografías adicionales -->
     <div class="mb-4">
       <label class="block text-blue-700 font-semibold mb-2" for="fotosAdicionales">Fotografías adicionales</label>
-      <input id="fotosAdicionales" type="file" accept="image/*" multiple class="block w-full text-gray-700">
-      <small class="text-gray-500">Puedes seleccionar varias fotografías que se mostrarán al abrir la noticia.</small>
+      <input
+        id="fotosAdicionales"
+        type="file"
+        accept="image/*"
+        multiple
+        (change)="onFileChange($event, 'fotosAdicionales')"
+        class="block w-full text-gray-700"
+      />
+      <small class="text-gray-500">
+        Puedes seleccionar varias fotografías que se mostrarán al abrir la noticia.
+      </small>
     </div>
-    <button type="submit" class="w-full bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition">Guardar noticia</button>
+
+    <!-- Botón de envío -->
+    <button
+      type="submit"
+      class="w-full bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition"
+      [disabled]="noticiaForm.invalid"
+    >
+      Guardar noticia
+    </button>
+
   </form>
 </div>
