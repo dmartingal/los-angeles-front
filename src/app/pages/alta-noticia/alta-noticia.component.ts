@@ -18,7 +18,7 @@ export class AltaNoticiaComponent {
     descripcion: '',
     fotoPrincipal: null,
     fotosAdicionales: [],
-    categoria: 'Competición', // ejemplo por defecto
+    categoria: 'COMPETICIÓN',
     linkDetalle: ''
   };
 
