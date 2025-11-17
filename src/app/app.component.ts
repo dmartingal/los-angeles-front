@@ -23,12 +23,21 @@ private titles: { [key: string]: string } = {
   };
 
   constructor(private router: Router) {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        // Obtiene la ruta sin el slash inicial
-        const url = event.urlAfterRedirects.replace(/^\/+/, '');
-        this.sectionTitle = this.titles[url] || 'Inicio';
-      });
-  }
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      const tree = this.router.parseUrl(this.router.url);
+      const path = tree.root.children['primary']?.segments.map(s => s.path).join('/') || '';
+
+      // Si es alta-noticia y viene con id → edición
+      if (path === 'alta-noticia' && tree.queryParams['id']) {
+        this.sectionTitle = 'Edición Noticia';
+        return;
+      }
+
+      // Caso normal
+      this.sectionTitle = this.titles[path] || 'Inicio';
+    });
+}
+
 }

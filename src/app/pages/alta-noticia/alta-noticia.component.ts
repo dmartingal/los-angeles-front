@@ -33,18 +33,24 @@ export class AltaNoticiaComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.modoEdicion = true;
-        this.noticiaId = id;
-        this.cargarNoticia(id);
-      }
-    });
-    console.log('Categorías disponibles:', this.categorias);
-  console.log('Valor inicial noticia.categoria:', this.noticia.categoria);
-  }
+ ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    const id = params['id'];
+
+    if (id) {
+      // MODO EDICIÓN
+      this.modoEdicion = true;
+      this.noticiaId = id;
+      this.cargarNoticia(id);
+    } else {
+      // MODO ALTA — RESETEAR TODO
+      this.modoEdicion = false;
+      this.noticiaId = undefined;
+      this.resetFormulario();
+    }
+  });
+}
+
 
   cargarNoticia(id: string) {
     this.noticiasService.getNoticiaById(id).subscribe(noticia => {
@@ -96,4 +102,16 @@ export class AltaNoticiaComponent implements OnInit {
       });
     }
   }
+
+  resetFormulario() {
+  this.noticia = {
+    titulo: '',
+    descripcion: '',
+    fotoPrincipal: null,
+    fotosAdicionales: [],
+    categoria: 'OTROS',   // o la que quieras por defecto
+    linkDetalle: ''
+  };
+}
+
 }

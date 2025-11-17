@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let noticia of noticias" class="border-b hover:bg-gray-100">
         <td class="py-3 px-4">{{ noticia.titulo }}</td>
-        <td class="py-3 px-4">{{ noticia.fecha }}</td>
+        <td class="py-3 px-4">{{ noticia.fecha | date:'dd-MM-yyyy' }}</td>
         <td class="py-3 px-4">{{ noticia.categoria }}</td>
 
         <td class="py-3 px-4 flex gap-3 justify-center">
