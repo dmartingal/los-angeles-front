@@ -34,4 +34,32 @@ export class NoticiasService {
       `${this.apiUrl}?page=${page}&size=${size}`
     );
   }
+
+  getNoticiaById(id: string): Observable<Noticia> {
+    return this.http.get<Noticia>(`${this.apiUrl}/${id}`);
+  }
+
+  updateNoticia(id: string, noticia: Partial<Noticia> & { fotoPrincipal?: File, fotosAdicionales?: File[] }): Observable<Noticia> {
+    const formData = new FormData();
+
+    formData.append('titulo', noticia.titulo ?? '');
+    formData.append('descripcion', noticia.descripcion ?? '');
+    formData.append('categoria', noticia.categoria ?? '');
+    formData.append('linkDetalle', noticia.linkDetalle ?? '');
+
+    if (noticia.fotoPrincipal) {
+      formData.append('fotoPrincipal', noticia.fotoPrincipal);
+    }
+
+    if (noticia.fotosAdicionales?.length) {
+      noticia.fotosAdicionales.forEach(foto => formData.append('fotosAdicionales', foto));
+    }
+
+    return this.http.put<Noticia>(`${this.apiUrl}/${id}`, formData);
+  }
+
+  deleteNoticia(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

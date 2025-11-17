@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoticiasService } from '../../services/noticias.service';
 import { Noticia } from '../../models/noticia.model';
+import { ShortTextPipe } from '../../pipes/short-text.pipe'; 
 
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ShortTextPipe],
   templateUrl: './noticias.component.html',
   styleUrls: ['./noticias.component.css'],
 })

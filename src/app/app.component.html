@@ -20,9 +20,37 @@
     <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/alta-noticia" routerLinkActive="font-bold">Alta Noticia</a>
-</li>
-  </ul>
+    <li class="relative group">
+    <button
+      class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95 flex items-center gap-1"
+    >
+      Gestión Noticias
+      <span class="text-xs">▼</span>
+    </button>
+
+    <!-- Submenú -->
+    <ul
+      class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible 
+            group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
+    >
+      <li>
+        <a
+          routerLink="/alta-noticia"
+          class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg"
+          >Alta Noticia</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/editar-noticias"
+          class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg"
+          >Editar Noticias</a
+        >
+      </li>
+    </ul>
+  </li>
+
+    </ul>
 </nav>
 
 <div class="p-6 my-6 bg-gradient-to-r from-fuchsia-500 via-blue-500 to-blue-800 rounded-xl shadow-lg flex items-center justify-center">

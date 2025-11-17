@@ -1,6 +1,5 @@
 <div class="max-w-xl mx-auto mt-10 bg-white rounded-xl shadow-lg p-8">
 
-  <!-- ngForm funciona porque el componente importa FormsModule -->
   <form (ngSubmit)="submitForm()" #noticiaForm="ngForm" novalidate>
     
     <!-- Título -->
@@ -27,6 +26,20 @@
         name="descripcion"
         required
       ></textarea>
+    </div>
+
+    <!-- Categoría -->
+    <div class="mb-4">
+      <label class="block text-blue-700 font-semibold mb-2" for="categoria">Categoría</label>
+      <select
+        id="categoria"
+        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [(ngModel)]="noticia.categoria"
+        name="categoria"
+        required
+      >
+        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+      </select>
     </div>
 
     <!-- Fotografía principal -->
@@ -57,13 +70,8 @@
       </small>
     </div>
 
-    <!-- Botón de envío -->
-    <button
-      type="submit"
-      class="w-full bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition"
-      [disabled]="noticiaForm.invalid"
-    >
-      Guardar noticia
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      {{ modoEdicion ? 'Actualizar Noticia' : 'Crear Noticia' }}
     </button>
 
   </form>

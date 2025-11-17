@@ -18,7 +18,8 @@ private titles: { [key: string]: string } = {
     'nuestro-club': 'Nuestro Club',
     'escuelas': 'Escuelas',
     'contacto': 'Contacto',
-    'alta-noticia': 'Alta Noticia'
+    'alta-noticia': 'Alta Noticia',
+    'editar-noticias': 'Editar Noticias'
   };
 
   constructor(private router: Router) {

@@ -4,6 +4,8 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { NuestroClubComponent } from './pages/nuestro-club/nuestro-club.component';
 import { EscuelasComponent } from './pages/escuelas/escuelas.component';
 import { AltaNoticiaComponent } from './pages/alta-noticia/alta-noticia.component';
+import { EditarNoticiasComponent } from './pages/editar-noticias/editar-noticias.component';
+
 
 export const routes: Routes = [
   { path: '', component: NoticiasComponent },
@@ -11,5 +13,6 @@ export const routes: Routes = [
   { path: 'nuestro-club', component: NuestroClubComponent },
   { path: 'escuelas', component: EscuelasComponent },
   { path: 'alta-noticia', component: AltaNoticiaComponent },
+  { path: 'editar-noticias', component: EditarNoticiasComponent },
   { path: '**', redirectTo: '' }
 ];

@@ -7,5 +7,5 @@ export interface Noticia {
   imagenesSecundarias: string[];
   linkDetalle: string;
   fecha?: string;
-  categoria: 'COMPETICIÓN' | 'ESCUELA' | 'EVENTOS' | '';
+  categoria: 'COMPETICIÓN' | 'ESCUELA' | 'EVENTOS' | 'OTROS' | '';
 }
