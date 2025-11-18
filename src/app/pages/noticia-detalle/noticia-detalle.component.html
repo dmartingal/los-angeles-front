@@ -1,0 +1,62 @@
+<div class="container mx-auto px-4 py-10 max-w-7xl" *ngIf="noticia">
+
+  <button (click)="router.navigate(['/noticias'])"
+          class="group mb-8 flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 text-gray-600 hover:text-blue-600 transition-all duration-300">
+    <span class="group-hover:-translate-x-1 transition-transform duration-300">←</span> 
+    <span class="font-medium">Volver a noticias</span>
+  </button>
+
+  <div class="mb-8 border-b border-gray-100 pb-6">
+    <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">
+      {{ noticia.titulo }}
+    </h1>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <span class="font-bold px-3 py-1 rounded-full text-sm tracking-wide uppercase shadow-sm"
+            [ngClass]="{
+              'bg-blue-50 text-blue-700 border border-blue-200': noticia.categoria === 'COMPETICIÓN',
+              'bg-fuchsia-50 text-fuchsia-700 border border-fuchsia-200': noticia.categoria === 'ESCUELA',
+              'bg-indigo-600 text-white border border-indigo-600': noticia.categoria === 'EVENTOS'
+            }">
+        {{ noticia.categoria }}
+      </span>
+      <div class="flex items-center text-gray-500 text-sm font-medium">
+        <svg class="w-4 h-4 mr-1.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        {{ noticia.fecha | date:'dd MMMM yyyy' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full mb-12 bg-gray-100 rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+    <div class="h-auto max-h-[600px] w-full flex items-center justify-center bg-gray-50">
+        <img *ngIf="noticia.imagenUrl"
+             [src]="noticia.imagenUrl"
+             alt="Imagen principal"
+             class="max-w-full max-h-[600px] object-contain shadow-sm" />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+    <div class="lg:col-span-4 space-y-8">
+      
+      <h3 *ngIf="noticia.imagenesSecundarias?.length" class="text-base font-bold text-gray-400 uppercase tracking-wider border-b pb-2 mb-4">
+        Galería de fotos
+      </h3>
+
+      <div *ngFor="let img of noticia.imagenesSecundarias" class="group relative">
+        <div class="overflow-hidden rounded-xl shadow-md border border-gray-200 bg-white">
+           <img [src]="img"
+             class="w-full object-cover transform group-hover:scale-105 transition-transform duration-500 cursor-pointer" />
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8">
+      <div class="prose prose-xl max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
+        {{ noticia.descripcion }}
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoticiasService } from '../../services/noticias.service';
 import { Noticia } from '../../models/noticia.model';
-import { ShortTextPipe } from '../../pipes/short-text.pipe'; 
+import { ShortTextPipe } from '../../pipes/short-text.pipe';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [CommonModule, ShortTextPipe],
+  imports: [CommonModule, ShortTextPipe, RouterModule],
   templateUrl: './noticias.component.html',
   styleUrls: ['./noticias.component.css'],
 })
@@ -19,7 +21,7 @@ export class NoticiasComponent implements OnInit {
   page: number = 0; // Página actual (0-indexed)
   size: number = 6; // Noticias por página
 
-  constructor(private noticiasService: NoticiasService) { }
+  constructor(private noticiasService: NoticiasService,private router: Router) { }
 
   ngOnInit(): void {
     this.cargarNoticias();
@@ -61,4 +63,9 @@ export class NoticiasComponent implements OnInit {
   get totalPaginas(): number {
     return Math.ceil(this.totalNoticias / this.size);
   }
+
+  verDetalle(id?: string) {
+  if (!id) return;
+  this.router.navigate(['/noticia', id]);
+}
 }

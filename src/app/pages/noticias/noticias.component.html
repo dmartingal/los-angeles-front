@@ -5,9 +5,10 @@
     <div *ngFor="let noticia of noticias; trackBy: trackById"
          class="bg-white rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-500 ease-in-out border-t-8"
          [ngClass]="{
-           'border-blue-500': noticia.categoria === 'COMPETICIÓN',
-           'border-fuchsia-500': noticia.categoria === 'ESCUELA',
-           'border-blue-800': noticia.categoria === 'EVENTOS'
+            'bg-blue-600 hover:bg-blue-700': noticia.categoria === 'COMPETICIÓN',
+            'bg-fuchsia-600 hover:bg-fuchsia-700': noticia.categoria === 'ESCUELA',
+            'bg-blue-800 hover:bg-blue-900': noticia.categoria === 'EVENTOS',
+            'bg-fuchsia-600 hover:bg-fuchsia-900': noticia.categoria === 'OTROS'
          }">
 
       <!-- Imagen -->
@@ -22,9 +23,10 @@
         <div class="flex justify-between items-center mb-3 text-sm">
           <span class="font-bold px-3 py-1 rounded-full text-xs uppercase"
                 [ngClass]="{
-                  'bg-blue-100 text-blue-800': noticia.categoria === 'COMPETICIÓN',
-                  'bg-fuchsia-100 text-fuchsia-800': noticia.categoria === 'ESCUELA',
-                  'bg-gray-200 text-gray-700': noticia.categoria === 'EVENTOS'
+                  'bg-blue-600 hover:bg-blue-700': noticia.categoria === 'COMPETICIÓN',
+                  'bg-fuchsia-600 hover:bg-fuchsia-700': noticia.categoria === 'ESCUELA',
+                  'bg-blue-800 hover:bg-blue-900': noticia.categoria === 'EVENTOS',
+                  'bg-fuchsia-600 hover:bg-fuchsia-900': noticia.categoria === 'OTROS'
                 }">
             {{ noticia.categoria }}
           </span>
@@ -37,17 +39,16 @@
         <p class="text-gray-600 mb-5 line-clamp-3 break-words">
           {{ noticia.descripcion | shortText:150 }}
         </p>
-
-        <a [href]="noticia.linkDetalle" target="_blank"
-           class="inline-flex items-center text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-           [ngClass]="{
-             'bg-blue-600 hover:bg-blue-700': noticia.categoria === 'COMPETICIÓN',
-             'bg-fuchsia-600 hover:bg-fuchsia-700': noticia.categoria === 'ESCUELA',
-             'bg-blue-800 hover:bg-blue-900': noticia.categoria === 'EVENTOS'
-           }">
+       <a (click)="verDetalle(noticia.id)"
+          class="inline-flex items-center text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+          [ngClass]="{
+            'bg-blue-600 hover:bg-blue-700': noticia.categoria === 'COMPETICIÓN',
+            'bg-fuchsia-600 hover:bg-fuchsia-700': noticia.categoria === 'ESCUELA',
+            'bg-blue-800 hover:bg-blue-900': noticia.categoria === 'EVENTOS'
+          }">
           Leer Noticia Completa
           <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
