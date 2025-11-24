@@ -40,7 +40,7 @@
 
     <div class="lg:col-span-4 space-y-8">
       
-      <h3 *ngIf="noticia.imagenesSecundarias?.length" class="text-base font-bold text-gray-400 uppercase tracking-wider border-b pb-2 mb-4">
+      <h3 *ngIf="noticia.imagenesSecundarias.length" class="text-base font-bold text-gray-400 uppercase tracking-wider border-b pb-2 mb-4">
         Galería de fotos
       </h3>
 
@@ -54,7 +54,10 @@
 
     <div class="lg:col-span-8">
       <div class="prose prose-xl max-w-none text-gray-700 leading-relaxed whitespace-pre-line">
-        {{ noticia.descripcion }}
+        <div
+          class="prose prose-xl max-w-none text-gray-700 leading-relaxed"
+          [innerHTML]="noticia.descripcion">
+        </div>
       </div>
     </div>
 

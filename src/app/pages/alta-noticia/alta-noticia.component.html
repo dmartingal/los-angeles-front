@@ -1,78 +1,154 @@
-<div class="max-w-xl mx-auto mt-10 bg-white rounded-xl shadow-lg p-8">
-
-  <form (ngSubmit)="submitForm()" #noticiaForm="ngForm" novalidate>
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  
+  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
     
-    <!-- Título -->
-    <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="titulo">Título</label>
-      <input
-        id="titulo"
-        type="text"
-        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        [(ngModel)]="noticia.titulo"
-        name="titulo"
-        required
-      />
+    <div class="bg-blue-600 px-8 py-6">
+      <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+        <span *ngIf="modoEdicion">✏️</span>
+        <span *ngIf="!modoEdicion">📝</span>
+        {{ modoEdicion ? 'Editar Noticia' : 'Nueva Noticia' }}
+      </h2>
+      <p class="text-blue-100 mt-1 text-sm">
+        Completa los detalles para publicar en el tablón de anuncios.
+      </p>
     </div>
 
-    <!-- Descripción -->
-    <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="descripcion">Descripción de la noticia</label>
-      <textarea
-        id="descripcion"
-        rows="5"
-        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        [(ngModel)]="noticia.descripcion"
-        name="descripcion"
-        required
-      ></textarea>
+    <div class="p-8">
+      <form (ngSubmit)="submitForm()" #noticiaForm="ngForm" novalidate class="space-y-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="titulo">
+              Título de la noticia
+            </label>
+            <input
+              id="titulo"
+              type="text"
+              placeholder="Ej: Gran victoria en el campeonato regional..."
+              class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border transition-colors"
+              [(ngModel)]="noticia.titulo"
+              name="titulo"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="categoria">
+              Categoría
+            </label>
+            <div class="relative">
+              <select
+                id="categoria"
+                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 border appearance-none bg-white transition-colors cursor-pointer"
+                [(ngModel)]="noticia.categoria"
+                name="categoria"
+                required
+              >
+                <option value="" disabled selected>Seleccionar...</option>
+                <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+  <label class="block text-sm font-medium text-gray-700 mb-1" for="descripcion">
+    Contenido de la noticia
+  </label>
+
+  <!-- Barra de herramientas -->
+  <ngx-editor-menu 
+    [editor]="editor"
+    class="border border-gray-300 rounded-t-lg bg-gray-50 p-2">
+  </ngx-editor-menu>
+
+    <!-- Editor -->
+    <ngx-editor
+      id="descripcion"
+      [editor]="editor"
+      [(ngModel)]="noticia.descripcion"
+      name="descripcion"
+      required
+      class="border border-gray-300 rounded-b-lg p-3 bg-white shadow-sm"
+    >
+    </ngx-editor>
+
+    <p class="text-xs text-gray-500 mt-1 text-right">
+      Se recomienda escribir aquí el texto enriquecido de la noticia.
+    </p>
+  </div>
+
+
+        <hr class="border-gray-200 my-6">
+
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 border-dashed">
+          <h3 class="text-lg font-medium text-gray-800 mb-4 flex items-center gap-2">
+            📸 Galería de Imágenes
+          </h3>
+          
+          <div class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-blue-700 mb-2" for="fotoPrincipal">
+                Imagen de Portada (Principal)
+              </label>
+              <input
+                id="fotoPrincipal"
+                type="file"
+                accept="image/*"
+                (change)="onFileChange($event, 'fotoPrincipal')"
+                class="block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2.5 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100
+                  cursor-pointer transition-all"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600 mb-2" for="fotosAdicionales">
+                Imágenes adicionales (Galería)
+              </label>
+              <input
+                id="fotosAdicionales"
+                type="file"
+                accept="image/*"
+                multiple
+                (change)="onFileChange($event, 'fotosAdicionales')"
+                class="block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2.5 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-gray-200 file:text-gray-700
+                  hover:file:bg-gray-300
+                  cursor-pointer transition-all"
+              />
+              <p class="text-xs text-gray-400 mt-2">
+                💡 Mantén presionada la tecla <span class="font-bold">Ctrl</span> para seleccionar varias fotos a la vez.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-4">
+          <button type="button" 
+                  class="px-6 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
+            Cancelar
+          </button>
+
+          <button type="submit" 
+                  [disabled]="!noticiaForm.form.valid"
+                  class="px-8 py-2.5 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all transform active:scale-95">
+            {{ modoEdicion ? 'Guardar Cambios' : 'Publicar Noticia' }}
+          </button>
+        </div>
+
+      </form>
     </div>
-
-    <!-- Categoría -->
-    <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="categoria">Categoría</label>
-      <select
-        id="categoria"
-        class="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        [(ngModel)]="noticia.categoria"
-        name="categoria"
-        required
-      >
-        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
-      </select>
-    </div>
-
-    <!-- Fotografía principal -->
-    <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="fotoPrincipal">Fotografía principal</label>
-      <input
-        id="fotoPrincipal"
-        type="file"
-        accept="image/*"
-        (change)="onFileChange($event, 'fotoPrincipal')"
-        class="block w-full text-gray-700"
-      />
-    </div>
-
-    <!-- Fotografías adicionales -->
-    <div class="mb-4">
-      <label class="block text-blue-700 font-semibold mb-2" for="fotosAdicionales">Fotografías adicionales</label>
-      <input
-        id="fotosAdicionales"
-        type="file"
-        accept="image/*"
-        multiple
-        (change)="onFileChange($event, 'fotosAdicionales')"
-        class="block w-full text-gray-700"
-      />
-      <small class="text-gray-500">
-        Puedes seleccionar varias fotografías que se mostrarán al abrir la noticia.
-      </small>
-    </div>
-
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-      {{ modoEdicion ? 'Actualizar Noticia' : 'Crear Noticia' }}
-    </button>
-
-  </form>
+  </div>
 </div>

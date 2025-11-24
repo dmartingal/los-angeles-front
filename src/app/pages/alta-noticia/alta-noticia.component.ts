@@ -1,19 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NoticiasService } from '../../services/noticias.service';
 import { Noticia } from '../../models/noticia.model';
+import { NgxEditorModule, Editor, Toolbar } from 'ngx-editor'; // ⬅️ CAMBIO: Importamos ngx-editor
 
 @Component({
   selector: 'app-noticia-alta',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgxEditorModule], // ⬅️ CAMBIO: Módulo de ngx-editor
   templateUrl: './alta-noticia.component.html',
 })
-export class AltaNoticiaComponent implements OnInit {
+export class AltaNoticiaComponent implements OnInit, OnDestroy {
 
-  categorias: string[] = ['COMPETICIÓN', 'ESCUELA', 'EVENTOS','OTROS'];
+  categorias: string[] = ['COMPETICIÓN', 'ESCUELA', 'EVENTOS', 'OTROS'];
+
+  editor!: Editor; // ⬅️ CAMBIO: Instancia del editor
+  
+  // ⬅️ CAMBIO: Configuración de toolbar para ngx-editor
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   noticia: Partial<Noticia> & { fotoPrincipal?: File | null; fotosAdicionales?: File[] } = {
     titulo: '',
@@ -30,27 +45,35 @@ export class AltaNoticiaComponent implements OnInit {
   constructor(
     private noticiasService: NoticiasService,
     private route: ActivatedRoute,
-    private router: Router
+    public router: Router
   ) {}
 
- ngOnInit() {
-  this.route.queryParams.subscribe(params => {
-    const id = params['id'];
+  ngOnInit() {
+    this.editor = new Editor(); // ⬅️ CAMBIO: Inicializamos el editor al arrancar
 
-    if (id) {
-      // MODO EDICIÓN
-      this.modoEdicion = true;
-      this.noticiaId = id;
-      this.cargarNoticia(id);
-    } else {
-      // MODO ALTA — RESETEAR TODO
-      this.modoEdicion = false;
-      this.noticiaId = undefined;
-      this.resetFormulario();
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+
+      if (id) {
+        // MODO EDICIÓN
+        this.modoEdicion = true;
+        this.noticiaId = id;
+        this.cargarNoticia(id);
+      } else {
+        // MODO ALTA
+        this.modoEdicion = false;
+        this.noticiaId = undefined;
+        this.resetFormulario();
+      }
+    });
+  }
+
+  // ⬅️ CAMBIO: Muy importante destruir el editor al salir
+  ngOnDestroy(): void {
+    if (this.editor) {
+      this.editor.destroy();
     }
-  });
-}
-
+  }
 
   cargarNoticia(id: string) {
     this.noticiasService.getNoticiaById(id).subscribe(noticia => {
@@ -64,10 +87,13 @@ export class AltaNoticiaComponent implements OnInit {
 
   onFileChange(event: any, campo: 'fotoPrincipal' | 'fotosAdicionales') {
     const files: FileList = event.target.files;
-    if (campo === 'fotoPrincipal') {
-      this.noticia.fotoPrincipal = files[0] ?? null;
-    } else {
-      this.noticia.fotosAdicionales = Array.from(files);
+    if (files.length > 0) {
+       if (campo === 'fotoPrincipal') {
+        this.noticia.fotoPrincipal = files[0];
+      } else {
+        // Convertimos FileList a Array
+        this.noticia.fotosAdicionales = Array.from(files);
+      }
     }
   }
 
@@ -104,14 +130,13 @@ export class AltaNoticiaComponent implements OnInit {
   }
 
   resetFormulario() {
-  this.noticia = {
-    titulo: '',
-    descripcion: '',
-    fotoPrincipal: null,
-    fotosAdicionales: [],
-    categoria: 'OTROS',   // o la que quieras por defecto
-    linkDetalle: ''
-  };
-}
-
+    this.noticia = {
+      titulo: '',
+      descripcion: '',
+      fotoPrincipal: null,
+      fotosAdicionales: [],
+      categoria: 'OTROS',
+      linkDetalle: ''
+    };
+  }
 }
