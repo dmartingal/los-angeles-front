@@ -1,56 +1,43 @@
 <nav class="bg-blue-800 text-white px-6 py-4 shadow-md flex items-center justify-between">
-  <!-- Logo y título juntos a la izquierda -->
   <div class="flex items-center gap-4">
-  <img src="assets/logoLosAngeles.png" alt="Logo Club" class="h-20 w-20 object-contain" />
-
-  <!-- Título + Lema -->
-  <div class="flex flex-col leading-tight">
-    <h1 class="font-bold text-3xl text-white/70" style="font-family: 'Oswald', Arial, sans-serif;">
-      CLUB ATLETISMO LOS ÁNGELES VILLAVERDE
-    </h1>
-    <span class="italic text-sm text-white/90 tracking-wide">
-      Formando personas a través del atletismo
-    </span>
+    <img src="assets/logoLosAngeles.png" alt="Logo Club" class="h-20 w-20 object-contain" />
+    <div class="flex flex-col leading-tight">
+      <h1 class="font-bold text-3xl text-white/70" style="font-family: 'Oswald', Arial, sans-serif;">
+        CLUB ATLETISMO LOS ÁNGELES VILLAVERDE
+      </h1>
+      <span class="italic text-sm text-white/90 tracking-wide">Formando personas a través del atletismo</span>
+    </div>
   </div>
-</div>
 
-  <!-- Menú de navegación -->
-  <ul class="flex gap-6">
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/" routerLinkActive="font-bold">Noticias</a></li>
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
-    <li class="relative group">
-    <button
-      class="text-white font-semibold text-lg hover:text-gray-300 transition duration-300 ease-in-out transform active:scale-95 flex items-center gap-1"
-    >
-      Gestión Noticias
-      <span class="text-xs">▼</span>
-    </button>
+  <ul class="flex gap-6 items-center">
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/" routerLinkActive="font-bold">Noticias</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
 
-    <!-- Submenú -->
-    <ul
-      class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible 
-            group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
-    >
-      <li>
-        <a
-          routerLink="/alta-noticia"
-          class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg"
-          >Alta Noticia</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/editar-noticias"
-          class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg"
-          >Editar Noticias</a
-        >
-      </li>
-    </ul>
-  </li>
+    <li *ngIf="(userRole$ | async) === 'ADMIN'" class="relative group">
+      <button class="text-white font-semibold text-lg hover:text-gray-300 flex items-center gap-1">
+        Gestión Noticias <span class="text-xs">▼</span>
+      </button>
+      <ul class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        <li><a routerLink="/alta-noticia" class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg">Alta Noticia</a></li>
+        <li><a routerLink="/editar-noticias" class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg">Editar Noticias</a></li>
+      </ul>
+    </li>
 
-    </ul>
+    <li *ngIf="!(userRole$ | async)">
+      <a class="bg-white text-blue-800 px-4 py-2 rounded-full font-bold hover:bg-gray-200 transition duration-300" 
+         routerLink="/acceso-miembros" routerLinkActive="bg-gray-200">
+        Acceso Miembros
+      </a>
+    </li>
+
+    <li *ngIf="(userRole$ | async)">
+      <button (click)="logout()" class="text-red-300 font-semibold hover:text-red-500 transition">
+        Cerrar Sesión
+      </button>
+    </li>
+  </ul>
 </nav>
 
 <div class="p-6 my-6 bg-gradient-to-r from-fuchsia-500 via-blue-500 to-blue-800 rounded-xl shadow-lg flex items-center justify-center">
