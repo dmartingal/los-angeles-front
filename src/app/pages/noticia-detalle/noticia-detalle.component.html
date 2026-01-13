@@ -22,7 +22,7 @@
       </span>
       <div class="flex items-center text-gray-500 text-sm font-medium">
         <svg class="w-4 h-4 mr-1.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-        {{ noticia.fecha | date:'dd MMMM yyyy' }}
+        {{ noticia.fecha | date:'dd MMMM yyyy':'':'es-ES' }}
       </div>
     </div>
   </div>
@@ -40,10 +40,6 @@
 
     <div class="lg:col-span-4 space-y-8">
       
-      <h3 *ngIf="noticia.imagenesSecundarias.length" class="text-base font-bold text-gray-400 uppercase tracking-wider border-b pb-2 mb-4">
-        Galería de fotos
-      </h3>
-
       <div *ngFor="let img of noticia.imagenesSecundarias" class="group relative">
         <div class="overflow-hidden rounded-xl shadow-md border border-gray-200 bg-white">
            <img [src]="img"
