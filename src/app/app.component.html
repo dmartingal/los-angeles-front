@@ -1,9 +1,12 @@
 <nav class="bg-blue-800 text-white px-6 py-4 shadow-md flex items-center justify-between">
   <div class="flex items-center gap-4">
-    <img src="assets/logoLosAngeles.png" alt="Logo Club" class="h-20 w-20 object-contain" />
+    <a routerLink="/" aria-label="Ir a Noticias" class="shrink-0">
+      <img src="assets/logoLosAngeles.png" alt="Logo Club" class="h-20 w-20 object-contain" />
+    </a>
     <div class="flex flex-col leading-tight">
-      <h1 class="font-bold text-3xl text-white/70" style="font-family: 'Oswald', Arial, sans-serif;">
-        CLUB ATLETISMO LOS ÁNGELES VILLAVERDE
+      <h1 class="text-lg md:text-xl font-extrabold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-300 via-fuchsia-400 to-fuchsia-600 drop-shadow" style="font-family: 'Oswald', Arial, sans-serif;">
+        <span class="block">Club Atletismo</span>
+        <span class="block">Los &Aacute;ngeles Villaverde</span>
       </h1>
       <span class="italic text-sm text-white/90 tracking-wide">Formando personas a través del atletismo</span>
     </div>
@@ -13,6 +16,7 @@
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/" routerLinkActive="font-bold">Noticias</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
+    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/sonoscape" routerLinkActive="font-bold">Sonoscape</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
 
     <li *ngIf="(userRole$ | async) === 'ADMIN'" class="relative group">
@@ -47,3 +51,8 @@
 </div>
 
 <router-outlet></router-outlet>
+
+
+
+
+

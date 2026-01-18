@@ -20,6 +20,7 @@ export class AppComponent {
     '': 'Noticias',
     'nuestro-club': 'Nuestro Club',
     'escuelas': 'Escuelas',
+    'sonoscape': 'Sonoscape',
     'contacto': 'Contacto',
     'acceso-miembros': 'Acceso Miembros',
     'alta-noticia': 'Alta Noticia',

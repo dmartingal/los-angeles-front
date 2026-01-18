@@ -12,6 +12,7 @@ import { AltaNoticiaComponent } from './pages/alta-noticia/alta-noticia.componen
 import { EditarNoticiasComponent } from './pages/editar-noticias/editar-noticias.component';
 import { NoticiaDetalleComponent } from './pages/noticia-detalle/noticia-detalle.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SonoscapeComponent } from './pages/sonoscape/sonoscape.component';
 
 // Guard de protección para Admin
 const adminGuard = () => {
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'nuestro-club', component: NuestroClubComponent },
   { path: 'escuelas', component: EscuelasComponent },
+  { path: 'sonoscape', component: SonoscapeComponent },
   { path: 'noticia/:id', component: NoticiaDetalleComponent },
   { path: 'acceso-miembros', component: LoginComponent },
 
