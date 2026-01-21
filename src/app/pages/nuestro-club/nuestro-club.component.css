@@ -1,0 +1,132 @@
+.club-hero {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -30px rgba(15, 23, 42, 0.65);
+  background: #0f172a;
+  min-height: 260px;
+}
+
+.club-hero-track {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 45vw, 420px);
+}
+
+.club-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.club-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.club-slide.active {
+  opacity: 1;
+}
+
+.club-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.15));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  gap: 8px;
+}
+
+.club-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.club-hero-title {
+  color: #fff;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.club-hero-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+.club-hero-nav:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.club-hero-nav.prev {
+  left: 16px;
+}
+
+.club-hero-nav.next {
+  right: 16px;
+}
+
+.club-hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.club-hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+.club-hero-dot.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+  .club-hero-overlay {
+    padding: 18px;
+  }
+
+  .club-hero-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+}

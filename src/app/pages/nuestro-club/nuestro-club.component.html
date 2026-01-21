@@ -1,45 +1,181 @@
-<section class="max-w-7xl mx-auto mt-10 bg-white rounded-lg shadow-lg p-8">
-  <p class="text-gray-700 text-lg mb-6 text-center">
-    El Club Atletismo Los Ángeles Villaverde es una familia apasionada por el atletismo, la superación y el compañerismo. Desde nuestra fundación, trabajamos para fomentar el deporte y los valores positivos en todas las edades.
-  </p>
-
-  <div class="grid md:grid-cols-2 gap-8 mb-8">
-    <div>
-      <h3 class="text-xl font-semibold text-blue-700 mb-2">Nuestra Historia</h3>
-      <p class="text-gray-600">
-        Fundado en 1995, nuestro club ha crecido hasta convertirse en un referente del atletismo en Villaverde. Hemos formado a atletas de todas las edades y participado en numerosas competiciones locales y nacionales.
+<section class="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 px-4 sm:px-6 lg:px-8 py-4">
+  <div class="max-w-6xl mx-auto space-y-12">
+    <div class="club-hero" (mouseenter)="pauseAutoplay()" (mouseleave)="resumeAutoplay()">
+      <div class="club-hero-track">
+        <div
+          class="club-slide"
+          *ngFor="let image of clubImages; let i = index"
+          [class.active]="i === activeIndex"
+        >
+          <img [src]="image" [alt]="'Foto del club ' + (i + 1)" />
+        </div>
+      </div>
+      <div class="club-hero-overlay">
+        <div class="club-hero-badge">Club Atletismo Los &Aacute;ngeles Villaverde</div>
+      </div>
+      <button class="club-hero-nav prev" type="button" (click)="prev()" aria-label="Imagen anterior">
+        &#x2039;
+      </button>
+      <button class="club-hero-nav next" type="button" (click)="next()" aria-label="Imagen siguiente">
+        &#x203A;
+      </button>
+      <div class="club-hero-dots">
+        <button
+          type="button"
+          class="club-hero-dot"
+          *ngFor="let image of clubImages; let i = index"
+          [class.active]="i === activeIndex"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Ir a la imagen ' + (i + 1)"
+        ></button>
+      </div>
+    </div>
+    <header class="text-center space-y-4">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-indigo-900">
+        Club Atletismo <span class="text-blue-600">Los &Aacute;ngeles Villaverde</span>
+      </h2>
+      <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+        Somos un club familiar de reciente formaci&oacute;n que empez&oacute; su andadura en Septiembre de 2025.
       </p>
-    </div>
-    <div>
-      <h3 class="text-xl font-semibold text-blue-700 mb-2">Misión y Valores</h3>
-      <ul class="list-disc list-inside text-gray-600">
-        <li>Fomentar la práctica deportiva y la vida saludable</li>
-        <li>Promover el respeto, la inclusión y el trabajo en equipo</li>
-        <li>Impulsar el desarrollo personal y deportivo de nuestros atletas</li>
-      </ul>
-    </div>
-  </div>
+    </header>
 
-  <div class="grid md:grid-cols-2 gap-8 mb-8">
-    <div>
-      <h3 class="text-xl font-semibold text-blue-700 mb-2">Equipo Técnico</h3>
-      <p class="text-gray-600">
-        Contamos con entrenadores titulados y experimentados, comprometidos con el desarrollo de cada atleta, desde la iniciación hasta el alto rendimiento.
-      </p>
+    <div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-2xl shadow-sm">
+      <div class="flex items-start gap-3">
+        <div class="mt-1 text-amber-600">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="space-y-2 text-amber-900">
+          <p class="font-semibold">
+            Estamos esperando la apertura de la pista de atletismo del Bosque Metropolitano en Villaverde.
+          </p>
+          <a class="inline-flex items-center gap-2 bg-amber-400 text-amber-950 font-bold text-sm px-4 py-2 rounded-full hover:bg-amber-300 transition" target="_blank" rel="noopener noreferrer"
+             href="https://www.google.com/maps/search/?api=1&query=Pista%20de%20atletismo%20Bosque%20Metropolitano%20Villaverde%20Madrid">
+            Ver ubicaci&oacute;n en Google Maps
+          </a>
+          <p class="font-medium">
+            Hasta ese entonces, estamos entrenando en la pista de atletismo del Ensanche de Vallecas.
+          </p>
+          <a class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold text-sm px-4 py-2 rounded-full hover:bg-blue-500 transition" target="_blank" rel="noopener noreferrer"
+             href="https://www.google.com/maps/search/?api=1&query=Pista%20de%20atletismo%20Ensanche%20de%20Vallecas%20Madrid">
+            Ver ubicaci&oacute;n en Google Maps
+          </a>
+        </div>
+      </div>
     </div>
-    <div>
-      <h3 class="text-xl font-semibold text-blue-700 mb-2">Instalaciones</h3>
-      <p class="text-gray-600">
-        Disponemos de pista de atletismo, gimnasio y zonas verdes para entrenamientos al aire libre, ofreciendo un entorno seguro y motivador.
-      </p>
-    </div>
-  </div>
 
-  <div class="bg-blue-50 rounded-lg p-6 mt-6">
-    <h3 class="text-lg font-semibold text-blue-800 mb-2">¿Quieres formar parte?</h3>
-    <p class="text-gray-700 mb-2">
-      Si te apasiona el atletismo y quieres unirte a nuestra familia, ¡te esperamos! Ponte en contacto con nosotros o ven a conocernos en nuestras instalaciones.
-    </p>
-    <a href="/contacto" class="inline-block mt-2 px-6 py-2 bg-blue-700 text-white rounded hover:bg-blue-800 transition">Contactar</a>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 bg-white rounded-3xl shadow-lg border border-slate-100 p-6 md:p-8 space-y-6">
+        <div class="bg-gradient-to-r from-indigo-900 via-blue-700 to-blue-500 text-white rounded-2xl p-6 md:p-8 shadow-md">
+          <p class="text-xs uppercase tracking-[0.3em] text-white/80">Nuestra misi&oacute;n</p>
+          <h3 class="text-2xl md:text-3xl font-extrabold mt-2">
+            Primer equipo de atletismo federado en Villaverde
+          </h3>
+          <p class="text-sm md:text-base text-white/90 font-semibold">
+            Atletismo para la zona Sur de Madrid
+          </p>
+          <p class="mt-4 text-white/95 text-base md:text-lg leading-relaxed">
+            Somos el primer equipo federado en Villaverde e intentamos fomentar la pr&aacute;ctica de este deporte en esta parte de la zona Sur de Madrid.
+          </p>
+          <p class="mt-3 text-white/85 text-sm md:text-base">
+            Queremos que el atletismo sea cercano, accesible y motivante para nuestro distrito, creando un espacio donde crecer, compartir y superarse.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+            <span class="text-gray-700 font-semibold">Comunidad y cercan&iacute;a</span>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-fuchsia-600"></span>
+            <span class="text-gray-700 font-semibold">Deporte base y salud</span>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <span class="text-gray-700 font-semibold">Valores y compa&ntilde;erismo</span>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+            <span class="text-gray-700 font-semibold">Mejora y constancia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-indigo-900 to-blue-600 text-white rounded-3xl shadow-xl p-6 md:p-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="bg-white/20 p-2 rounded-full">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.036 6.28a1 1 0 00.95.69h6.6c.969 0 1.371 1.24.588 1.81l-5.34 3.88a1 1 0 00-.364 1.118l2.036 6.28c.3.92-.755 1.688-1.54 1.118l-5.34-3.88a1 1 0 00-1.176 0l-5.34 3.88c-.784.57-1.838-.197-1.539-1.118l2.036-6.28a1 1 0 00-.364-1.118L2.39 11.707c-.783-.57-.38-1.81.588-1.81h6.6a1 1 0 00.95-.69l2.036-6.28z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-extrabold">Entrenador</h3>
+        </div>
+        <p class="text-white/90 leading-relaxed">
+          Entrenador: Dar&iacute;o Mart&iacute;n Galiano, atleta federado desde 1996 y con t&iacute;tulo de entrenador de club.
+        </p>
+        <p class="text-white/80 text-sm mt-4">
+          Comprometido con un trato cercano, formaci&oacute;n continua y una base s&oacute;lida de valores.
+        </p>
+      </div>
+    </div>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+        <h4 class="text-lg font-bold text-blue-700 mb-2">Entrenamos ahora</h4>
+        <div class="space-y-3 text-gray-700">
+          <p><strong>D&oacute;nde:</strong> Ensanche de Vallecas</p>
+          <p><strong>Enfoque:</strong> formaci&oacute;n y progresi&oacute;n por edades</p>
+          <p><strong>Para qui&eacute;n:</strong> atletas en iniciaci&oacute;n y desarrollo</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+        <h4 class="text-lg font-bold text-blue-700 mb-2">&iquest;Por qu&eacute; unirte?</h4>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-600"></span>Ambiente familiar y motivante</li>
+          <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-600"></span>Progreso deportivo paso a paso</li>
+          <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-600"></span>Salud, disciplina y h&aacute;bitos positivos</li>
+          <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-600"></span>Compa&ntilde;erismo y valores</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6">
+        <h4 class="text-lg font-bold text-blue-700 mb-2">Contacto r&aacute;pido</h4>
+        <p class="text-gray-700">
+          Si quieres unirte o probar, ponte en contacto con nosotros.
+        </p>
+        <a href="/contacto" class="inline-flex items-center justify-center mt-4 w-full bg-indigo-900 text-white font-bold px-4 py-2 rounded-full hover:bg-indigo-800 transition">
+          Contactar
+        </a>
+      </div>
+    </section>
+
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-900 to-blue-800 text-white rounded-3xl p-6 md:p-10 shadow-xl border border-white/10">
+      <div class="flex items-start gap-4">
+        <div class="bg-white/15 p-3 rounded-2xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l2.09 6.26L20 9l-5 3.64L16.18 19 12 15.77 7.82 19 9 12.64 4 9l5.91-.74L12 2z" />
+          </svg>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-extrabold">Nuestro nombre, nuestra historia</h3>
+            <p class="text-white/80 font-semibold">Un homenaje a quien dedic&oacute; su vida al atletismo.</p>
+          </div>
+          <p class="text-white/90 leading-relaxed">
+            Este club es un homenaje al entrenador Alipio Mora &Aacute;vila, fallecido en 2008, con toda una vida dedicada al atletismo, creador del Club Atletismo Los &Aacute;ngeles Getafe.
+          </p>
+          <p class="text-white/90 leading-relaxed">
+            Este club es un homenaje a &eacute;l y de ah&iacute; el nombre de este club.
+          </p>
+          <p class="italic text-white/70 border-l-4 border-white/40 pl-4">
+            Su pasi&oacute;n sigue viva en cada entrenamiento.
+          </p>
+          <p class="text-white/80 text-sm font-semibold">
+            Por respeto a su legado, llevamos su nombre con orgullo.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

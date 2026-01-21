@@ -15,7 +15,15 @@
   <ul class="flex gap-6 items-center">
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/" routerLinkActive="font-bold">Noticias</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/nuestro-club" routerLinkActive="font-bold">Nuestro Club</a></li>
-    <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/escuelas" routerLinkActive="font-bold">Escuelas</a></li>
+    <li class="relative group">
+      <button class="text-white font-semibold text-lg hover:text-gray-300 flex items-center gap-1">
+        Escuelas <span class="text-xs">▼</span>
+      </button>
+      <ul class="absolute left-0 mt-2 w-40 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        <li><a routerLink="/escuelas" routerLinkActive="font-bold text-black" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Horarios</a></li>
+        <li><a routerLink="/categorias" routerLinkActive="font-bold" class="block px-4 py-2 hover:bg-gray-100 rounded-lg">Categor&iacute;as y Pruebas</a></li>
+      </ul>
+    </li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/sonoscape" routerLinkActive="font-bold">Sonoscape</a></li>
     <li><a class="text-white font-semibold text-lg hover:text-gray-300" routerLink="/contacto" routerLinkActive="font-bold">Contacto</a></li>
 
@@ -24,8 +32,8 @@
         Gestión Noticias <span class="text-xs">▼</span>
       </button>
       <ul class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-        <li><a routerLink="/alta-noticia" class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg">Alta Noticia</a></li>
-        <li><a routerLink="/editar-noticias" class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg">Editar Noticias</a></li>
+        <li><a routerLink="/alta-noticia" routerLinkActive="font-bold text-black" class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg">Alta Noticia</a></li>
+        <li><a routerLink="/editar-noticias" routerLinkActive="font-bold text-black" class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg">Editar Noticias</a></li>
       </ul>
     </li>
 

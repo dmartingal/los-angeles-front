@@ -21,6 +21,7 @@ export class AppComponent {
     'nuestro-club': 'Nuestro Club',
     'escuelas': 'Escuelas',
     'sonoscape': 'Sonoscape',
+    'categorias': 'Categorias y Pruebas',
     'contacto': 'Contacto',
     'acceso-miembros': 'Acceso Miembros',
     'alta-noticia': 'Alta Noticia',
